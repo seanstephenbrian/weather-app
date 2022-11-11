@@ -44,17 +44,46 @@ async function getData(city, country, state) {
     return json;    
 }
 
-const londonData = getData('london');
-londonData
-    .then(data => processData(data))
-    .catch(msg => { console.error(msg) });
+
+    // this code will be inside a form-submit function:
+    // london example for testing purposes only:
+    const londonData = getData('london');
+    londonData
+        .then(data => processData(data))
+        .catch(msg => { console.error(msg) });
 
 function processData(data) {
     console.log(data);
-    const name = data.name.toLowerCase();
+    const place = data.name.toLowerCase();
     const description = data.weather[0].description;
     const temp = data.main.temp;
     const highTemp = data.main.temp_max;
     const lowTemp = data.main.temp_min;
-    console.log(name, description, temp, highTemp, lowTemp);
+    console.log(place, description, temp, highTemp, lowTemp);
+    showWeatherReport(place, description, temp, highTemp, lowTemp);
+}
+
+// DOM-related javascript:
+
+function showWeatherReport(place, description, temp, highTemp, lowTemp) {
+    const placeDiv = document.querySelector('.place');
+    const descriptionDiv = document.querySelector('.description');
+    const tempDiv = document.querySelector('.temp');
+    const highTempDiv = document.querySelector('.high-temp');
+    const lowTempDiv = document.querySelector('.low-temp');
+
+    placeDiv.textContent = place;
+
+    descriptionDiv.textContent = description;
+
+    const units = localStorage.getItem('units');
+    if (units === 'imperial') {
+        tempDiv.textContent = `${temp} F`;
+        highTempDiv.textContent = `${highTemp} F`;
+        lowTempDiv.textContent = `${lowTemp} F`;
+    } else if (units === 'metric') {
+        tempDiv.textContent = `${temp} C`;
+        highTempDiv.textContent = `${highTemp} C`;
+        lowTempDiv.textContent = `${lowTemp} C`;
+    }
 }
