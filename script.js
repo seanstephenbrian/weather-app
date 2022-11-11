@@ -47,10 +47,11 @@ async function getData(city, country, state) {
 
     // this code will be inside a form-submit function:
     // london example for testing purposes only:
-    const londonData = getData('london');
-    londonData
-        .then(apiData => processData(apiData))
-        .catch(msg => { console.error(msg) });
+
+    // const londonData = getData('london');
+    // londonData
+    //     .then(apiData => processData(apiData))
+    //     .catch(msg => { console.error(msg) });
 
 function processData(apiData) {
     console.log(apiData);
@@ -58,9 +59,9 @@ function processData(apiData) {
     const displayData = {
         'place': apiData.name.toLowerCase(),
         'description': apiData.weather[0].description.toLowerCase(),
-        'temp': apiData.main.temp,
-        'high': apiData.main.temp_max,
-        'low': apiData.main.temp_min
+        'temp': Math.round(apiData.main.temp),
+        'high': Math.round(apiData.main.temp_max),
+        'low': Math.round(apiData.main.temp_min)
     }
     
     console.log(displayData);
@@ -74,8 +75,8 @@ function showWeatherReport(displayData) {
     const placeDiv = document.querySelector('.place');
     const descriptionDiv = document.querySelector('.description');
     const tempDiv = document.querySelector('.temp');
-    const highTempDiv = document.querySelector('.high-temp');
-    const lowTempDiv = document.querySelector('.low-temp');
+    const highTempSpan = document.querySelector('.high-temp');
+    const lowTempSpan = document.querySelector('.low-temp');
 
     placeDiv.textContent = displayData.place;
 
@@ -83,12 +84,12 @@ function showWeatherReport(displayData) {
 
     const units = localStorage.getItem('units');
     if (units === 'imperial') {
-        tempDiv.textContent = `current temperature: ${displayData.temp} F`;
-        highTempDiv.textContent = `high: ${displayData.high} F`;
-        lowTempDiv.textContent = `low: ${displayData.low} F`;
+        tempDiv.textContent = `${displayData.temp} F`;
+        highTempSpan.textContent = `high: ${displayData.high}`;
+        lowTempSpan.textContent = `low: ${displayData.low}`;
     } else if (units === 'metric') {
         tempDiv.textContent = `current temperature: ${displayData.temp} C`;
-        highTempDiv.textContent = `high: ${displayData.high} C`;
-        lowTempDiv.textContent = `low: ${displayData.low} C`;
+        highTempSpan.textContent = `high: ${displayData.high}`;
+        lowTempSpan.textContent = `low: ${displayData.low}`;
     }
 }
