@@ -57,12 +57,17 @@ header {
 }
 
 .search-form {
-    width: 300px;
+    width: 250px;
+    height: 250px;
     display: flex;
     gap: 5px;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     font-size: 1.1rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 50px;
 }
 
 .search-form input {
