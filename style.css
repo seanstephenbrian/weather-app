@@ -20,7 +20,18 @@ time, mark, audio, video {
 }
 
 :root {
-    --egg: #ffeac9;
+    --default: #ffeac9;
+
+    /* background colors for all weather types: */
+    --atmosphere: #a5b3dd;
+    --clear-day: #fffa69;
+    --clear-night: #000000;
+    --clouds: #9f9f9f;
+    --drizzle: #819ee4;
+    --green: #39a418;
+    --rain: #2d58bd;
+    --snow: #eeeeee;
+    --thunderstorm: #ffc227;
 }
 
 html,
@@ -109,7 +120,7 @@ button {
     width: fit-content;
     padding: 0.5rem;
     border: 1px solid black;
-    background-color: var(--egg);
+    background-color: var(--turner);
     font-family: 'Helvetica';
     border-radius: 1rem;
     cursor: pointer;
@@ -128,7 +139,7 @@ button {
     border: 1px solid black;
     border-radius: 50%;
     padding: 50px;
-    background-color: var(--egg);
+    background-color: var(--default);
     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.216);
 }
 
@@ -150,42 +161,40 @@ footer {
 }
 
 .block-1 {
-    background-color: #000000;
+    background-color: var(--clear-night);
 }
 
 .block-2 {
-    background-color: #9e9e9e;
+    background-color: var(--clouds);
 }
 
 .block-3 {
-    background-color: #96a0bd;
+    background-color: var(--atmosphere);
 }
 
 .block-4 {
-    background-color: #c0d0f6;
+    background-color: var(--drizzle);
 }
 
 .block-5 {
-    background-color: #4173eb;
+    background-color: var(--rain);
 }
 
 .block-6 {
-    background-color: #37c40c;
+    background-color: var(--green);
 }
 
 .block-7 {
-    background-color: #ffc222;
+    background-color: var(--thunderstorm);
 }
 
 .block-8 {
-    background-color: #fff700;
+    background-color: var(--clear-day);
 }
 
 .block-9 {
-    background-color: #ffffff;
+    background-color: var(--snow);
 }
-
-
 
 @media only screen and (min-width: 750px) {
     header,

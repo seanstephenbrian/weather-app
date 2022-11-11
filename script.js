@@ -48,16 +48,17 @@ async function getData(city, country, state) {
     // this code will be inside a form-submit function:
     // london example for testing purposes only:
 
-    // const londonData = getData('london');
-    // londonData
-    //     .then(apiData => processData(apiData))
-    //     .catch(msg => { console.error(msg) });
+    const londonData = getData('london');
+    londonData
+        .then(apiData => processData(apiData))
+        .catch(msg => { console.error(msg) });
 
 function processData(apiData) {
     console.log(apiData);
 
     const displayData = {
         'place': apiData.name.toLowerCase(),
+        'weather': apiData.weather[0].main.toLowerCase(),
         'description': apiData.weather[0].description.toLowerCase(),
         'temp': Math.round(apiData.main.temp),
         'high': Math.round(apiData.main.temp_max),
@@ -70,7 +71,31 @@ function processData(apiData) {
 
 // DOM-related javascript:
 
+function hideForm() {
+    const search = document.querySelector('.search');
+    search.classList.add('hide');
+}
+
+function setBgColor(weather) {
+    const main = document.querySelector('.main');
+    
+    // add logic to check for 'atmosphere'-type conditions:
+
+    if (weather !== 'clear') {
+        main.style.backgroundColor = `var(--${weather})`;
+    } 
+    
+    // add logic to check time if weather is clear and then set the bg-color to either clear-day or clear-night depending on the time:
+    // else if (weather === 'clear') {
+
+    // }
+}
+
 function showWeatherReport(displayData) {
+
+    hideForm();
+
+    setBgColor(displayData.weather);
 
     const placeDiv = document.querySelector('.place');
     const descriptionDiv = document.querySelector('.description');
