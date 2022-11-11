@@ -47,10 +47,10 @@ async function getData(city, country, state) {
 
     // this code will be inside a form-submit function:
     // london example for testing purposes only:
-    const londonData = getData('london');
-    londonData
-        .then(apiData => processData(apiData))
-        .catch(msg => { console.error(msg) });
+    // const londonData = getData('london');
+    // londonData
+    //     .then(apiData => processData(apiData))
+    //     .catch(msg => { console.error(msg) });
 
 function processData(apiData) {
     console.log(apiData);

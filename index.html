@@ -10,17 +10,25 @@
 </head>
 <body>
     <header>how's the weather?</header>
-    <main>
-        <div class="search"></div>
-        <div class="weather">
+    <div class="main">
+        <div class="search">
+            <form class="search-form" action="GET">
+                <div class="title">enter your location:</div>
+                <label for="city">city:</label>
+                <input type="text" name="city" id="city"></input>
+                <label for="country">country:</label>
+                <input type="text" name="country" id="country"></input>
+                <button type="submit">show weather report</button>
+            </form>
+        </div>
+        <div class="weather hide">
             <div class="place"></div>
             <div class="description"></div>
             <div class="temp"></div>
             <div class="high-temp"></div>
             <div class="low-temp"></div>
-            
         </div>
-    </main>
+    </div>
     <footer></footer>
 </body>
 </html>
