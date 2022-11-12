@@ -98,26 +98,33 @@ function setBgColor(weather, time, id) {
             main.style.backgroundColor = 'var(--clear-day)';
         }
     } else if (weather === 'rain') {
+        // light rain, moderate rain, light intensity shower rain, shower rain, ragged shower rain:
         if (id === 500 || id === 501 || id === 520 || id === 521 || id === 531 ) {
             main.style.backgroundColor = 'var(--rain)';
         } else {
             main.style.backgroundColor = 'var(--heavy-rain)';
         }
     } else if (weather === 'clouds') {
+        // few clouds, scattered clouds:
         if (id === 801 || id === 802) {
             main.style.backgroundColor = 'var(--few-clouds)';
         } else {
             main.style.backgroundColor = 'var(--clouds)';
         }
     } else if (id > 700 && id < 800) {
+        // mist, fog:
         if (id === 701 || id === 741) {
             main.style.backgroundColor = 'var(--atmosphere)';
+        // dust, sand:
         } else if (id === 731 || id === 751 || id === 761) {
             main.style.backgroundColor = 'var(--thunderstorm)';
+        // smoke, haze, ash:
         } else if (id === 711 || id === 721 || id === 762) {
             main.style.backgroundColor = 'var(--clouds)';
+        // squall:
         } else if (id === 771) {
             main.style.backgroundColor = 'var(--heavy-rain)';
+        // tornado:
         } else if (id === 781) {
             main.style.backgroundColor = 'var(--clear-night)';
         }
@@ -173,7 +180,7 @@ function showWeatherReport(displayData) {
 // this code will be inside a form-submit function:
     // london example for testing purposes only:
 
-    const testData = getData('naples');
+    const testData = getData('chicago');
     testData
         .then(apiData => processData(apiData))
         .catch(msg => { console.error(msg) });
