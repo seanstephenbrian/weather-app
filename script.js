@@ -78,6 +78,15 @@ function hideForm() {
     search.classList.add('hide');
 }
 
+function setHeaderImg(time) {
+    const header = document.querySelector('header');
+    if (time === 'day') {
+        header.style.backgroundImage = `url(img/day.jpg)`;
+    } else if (time === 'night') {
+        header.style.backgroundImage = `url(img/night.jpg)`;
+    }
+}
+
 function setBgColor(weather, time, id) {
     const main = document.querySelector('.main');
     if (weather === 'clear') {
@@ -129,6 +138,8 @@ function showWeatherReport(displayData) {
 
     hideForm();
 
+    setHeaderImg(displayData.time);
+
     setBgColor(displayData.weather, displayData.time, displayData.id);
 
     setFooterColors(displayData.time);
@@ -160,7 +171,7 @@ function showWeatherReport(displayData) {
 // this code will be inside a form-submit function:
     // london example for testing purposes only:
 
-    const testData = getData('london');
+    const testData = getData('los angeles');
     testData
         .then(apiData => processData(apiData))
         .catch(msg => { console.error(msg) });

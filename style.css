@@ -24,15 +24,15 @@ time, mark, audio, video {
 
     /* background colors for all weather types: */
     --atmosphere: #a5b3dd;
-    --clear-day: #fff98e;
-    --clear-night: #000000;
+    --clear-day: #fdfab7;
+    --clear-night: #2e2e2e;
     --few-clouds: #dddddd;
     --clouds: #9f9f9f;
     --drizzle: #819ee4;
     --heavy-rain: #2f7e43;
     --rain: #4c5fc7;
     --snow: #eeeeee;
-    --thunderstorm: #ffc227;
+    --thunderstorm: #fbc94a;
 }
 
 html,
@@ -70,7 +70,7 @@ header {
     font-size: 2rem;
     letter-spacing: 0.1rem;
     border-bottom: 1px solid black;
-    background-image: url('img/default.jpg');
+    background-image: url('img/day.jpg');
     background-size: cover;
     color: white;
 }
