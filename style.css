@@ -38,11 +38,25 @@ time, mark, audio, video {
 html,
 body {
     min-height: 100vh;
-    font-family: 'Times New Roman';
+    font-family: 'Torre Farfan', 'EB Garamond', 'Times New Roman';
+}
+
+@font-face {
+    font-family: 'Torre Farfan';
+    src: url('font/torrefarfan/torrefarfan.ttf');
+}
+
+@font-face {
+    font-family: 'EB Garamond';
+    src: url('font/eb-garamond/EBGaramond-Regular.ttf');
 }
 
 .hide {
     display: none;
+}
+
+.apostrophe {
+    font-family: 'EB Garamond';
 }
 
 .day {
@@ -52,6 +66,7 @@ body {
 .night {
     filter: brightness(80%);
     backdrop-filter: brightness(80%);
+    -webkit-backdrop-filter: brightness(80%);
 }
 
 body {
@@ -61,6 +76,7 @@ body {
 }
 
 header {
+    z-index: 1;
     padding: 3vh 0;
     min-height: 7vh;
     max-height: 20vh;
@@ -69,10 +85,17 @@ header {
     align-items: center;
     font-size: 2rem;
     letter-spacing: 0.1rem;
-    border-bottom: 1px solid black;
+    box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.505);
     background-image: url('img/day.jpg');
     background-size: cover;
     color: white;
+}
+
+header.night {
+    filter: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    text-shadow: 0 0 6px black;
 }
 
 .main {
@@ -147,7 +170,6 @@ button {
     align-items: center;
     gap: 10px;
     font-size: 1.3rem;
-    border: 1px solid black;
     border-radius: 50%;
     padding: 50px;
     background-color: var(--default);
@@ -164,9 +186,9 @@ button {
 }
 
 footer {
+    box-shadow: 0 0 9px 2px rgba(0, 0, 0, 0.406);
     min-height: 7vh;
     max-height: 20vh;
-    border-top: 1px solid black;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
 }
@@ -224,7 +246,7 @@ footer {
 
     .place:hover {
         font-style: italic;
-        letter-spacing: 0.5rem;
+        letter-spacing: 0.3rem;
         text-indent: 0.5rem;
     }
 

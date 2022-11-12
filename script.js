@@ -80,6 +80,8 @@ function hideForm() {
 
 function setHeaderImg(time) {
     const header = document.querySelector('header');
+    header.classList.remove('night', 'day');
+    header.classList.add(time);
     if (time === 'day') {
         header.style.backgroundImage = `url(img/day.jpg)`;
     } else if (time === 'night') {
@@ -171,7 +173,7 @@ function showWeatherReport(displayData) {
 // this code will be inside a form-submit function:
     // london example for testing purposes only:
 
-    const testData = getData('los angeles');
+    const testData = getData('naples');
     testData
         .then(apiData => processData(apiData))
         .catch(msg => { console.error(msg) });
