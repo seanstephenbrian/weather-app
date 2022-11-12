@@ -20,16 +20,17 @@ time, mark, audio, video {
 }
 
 :root {
-    --default: #ffeac9;
+    --default: #ffffffb0;
 
     /* background colors for all weather types: */
     --atmosphere: #a5b3dd;
-    --clear-day: #fffa69;
+    --clear-day: #fff98e;
     --clear-night: #000000;
+    --few-clouds: #dddddd;
     --clouds: #9f9f9f;
     --drizzle: #819ee4;
-    --green: #39a418;
-    --rain: #2d58bd;
+    --heavy-rain: #2f7e43;
+    --rain: #4c5fc7;
     --snow: #eeeeee;
     --thunderstorm: #ffc227;
 }
@@ -44,9 +45,19 @@ body {
     display: none;
 }
 
+.day {
+
+}
+
+.night {
+    filter: brightness(80%);
+    backdrop-filter: brightness(80%);
+}
+
 body {
     display: flex;
     flex-direction: column;
+    background-color: var(--clear-day);
 }
 
 header {
@@ -181,7 +192,7 @@ footer {
 }
 
 .block-6 {
-    background-color: var(--green);
+    background-color: var(--heavy-rain);
 }
 
 .block-7 {

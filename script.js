@@ -44,25 +44,27 @@ async function getData(city, country, state) {
     return json;    
 }
 
-
-    // this code will be inside a form-submit function:
-    // london example for testing purposes only:
-
-    const londonData = getData('london');
-    londonData
-        .then(apiData => processData(apiData))
-        .catch(msg => { console.error(msg) });
-
 function processData(apiData) {
     console.log(apiData);
+
+    const icon = apiData.weather[0].icon;
+    const dayOrNight = icon.slice(-1);
+    let time;
+    if (dayOrNight === 'd') {
+        time = 'day';
+    } else if (dayOrNight === 'n') {
+        time = 'night';
+    }
 
     const displayData = {
         'place': apiData.name.toLowerCase(),
         'weather': apiData.weather[0].main.toLowerCase(),
         'description': apiData.weather[0].description.toLowerCase(),
+        'id': apiData.weather[0].id,
         'temp': Math.round(apiData.main.temp),
         'high': Math.round(apiData.main.temp_max),
-        'low': Math.round(apiData.main.temp_min)
+        'low': Math.round(apiData.main.temp_min),
+        'time': time
     }
     
     console.log(displayData);
@@ -76,26 +78,60 @@ function hideForm() {
     search.classList.add('hide');
 }
 
-function setBgColor(weather) {
+function setBgColor(weather, time, id) {
     const main = document.querySelector('.main');
-    
-    // add logic to check for 'atmosphere'-type conditions:
-
-    if (weather !== 'clear') {
+    if (weather === 'clear') {
+        if (time === 'night') {
+            main.style.backgroundColor = 'var(--clear-night)';
+        } else if (time === 'day') {
+            main.style.backgroundColor = 'var(--clear-day)';
+        }
+    } else if (weather === 'rain') {
+        if (id === 500 || id === 501 || id === 520 || id === 521 || id === 531 ) {
+            main.style.backgroundColor = 'var(--rain)';
+        } else {
+            main.style.backgroundColor = 'var(--heavy-rain)';
+        }
+    } else if (weather === 'clouds') {
+        if (id === 801 || id === 802) {
+            main.style.backgroundColor = 'var(--few-clouds)';
+        } else {
+            main.style.backgroundColor = 'var(--clouds)';
+        }
+    } else if (id > 700 && id < 800) {
+        if (id === 701 || id === 741) {
+            main.style.backgroundColor = 'var(--atmosphere)';
+        } else if (id === 731 || id === 751 || id === 761) {
+            main.style.backgroundColor = 'var(--thunderstorm)';
+        } else if (id === 711 || id === 721 || id === 762) {
+            main.style.backgroundColor = 'var(--clouds)';
+        } else if (id === 771) {
+            main.style.backgroundColor = 'var(--heavy-rain)';
+        } else if (id === 781) {
+            main.style.backgroundColor = 'var(--clear-night)';
+        }
+    } else {
         main.style.backgroundColor = `var(--${weather})`;
-    } 
+    }
     
-    // add logic to check time if weather is clear and then set the bg-color to either clear-day or clear-night depending on the time:
-    // else if (weather === 'clear') {
+    main.classList.remove('day', 'night');
+    main.classList.add(time);
 
-    // }
+}
+
+function setFooterColors(time) {
+    const footer = document.querySelector('footer');
+    footer.classList.remove('day', 'night');
+    footer.classList.add(time);
 }
 
 function showWeatherReport(displayData) {
 
     hideForm();
 
-    setBgColor(displayData.weather);
+    setBgColor(displayData.weather, displayData.time, displayData.id);
+
+    setFooterColors(displayData.time);
 
     const placeDiv = document.querySelector('.place');
     const descriptionDiv = document.querySelector('.description');
@@ -118,3 +154,13 @@ function showWeatherReport(displayData) {
         lowTempSpan.textContent = `low: ${displayData.low}`;
     }
 }
+
+
+
+// this code will be inside a form-submit function:
+    // london example for testing purposes only:
+
+    const testData = getData('london');
+    testData
+        .then(apiData => processData(apiData))
+        .catch(msg => { console.error(msg) });
