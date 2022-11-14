@@ -193,7 +193,7 @@ button {
     box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.216);
     position: absolute;
     bottom: 2rem;
-    
+    color: black;
 }
 
 .search-again {
