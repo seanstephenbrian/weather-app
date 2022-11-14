@@ -266,6 +266,33 @@ function showErrorMessage() {
     lowTempSpan.textContent = '';
 }
 
-addListeners();
+// method to dynamically set body height, ensuring that mobile users see the footer:
+function setBodyHeight() {
+    // set body min-height & body height to inner window height:
+    const windowHeight = window.innerHeight + "px";
+    document.body.style.minHeight = windowHeight;
+    document.body.style.height = windowHeight;
+    // empty maxHeight style in case it is unnecessary for the current page:
+    document.body.style.maxHeight = '';
+}
 
+// set body max-height (this ensures there's not empty space on contact & about pages):
+function setBodyMaxHeight() {
+    const windowHeight = window.innerHeight + "px";
+    document.body.style.maxHeight = windowHeight;
+}
+
+// re-adjust body height if the screen orientation changes:
+function detectOrientationChange() {
+    const portrait = window.matchMedia("(orientation: portrait)");
+    portrait.addEventListener("change", setBodyHeight);
+    const landscape = window.matchMedia("(orientation: landscape)");
+    landscape.addEventListener("change", setBodyHeight);
+}
+
+setBodyHeight();
+detectOrientationChange();
+window.addEventListener('resize', setBodyHeight);
+window.addEventListener('orientationchange', setBodyHeight);
+addListeners();
 checkForUnitPreference();
