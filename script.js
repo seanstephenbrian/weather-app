@@ -252,10 +252,18 @@ function showErrorMessage() {
     hideForm();
 
     const placeDiv = document.querySelector('.place');
+    const descriptionDiv = document.querySelector('.description');
+    const tempDiv = document.querySelector('.temp');
+    const highTempSpan = document.querySelector('.high-temp');
+    const lowTempSpan = document.querySelector('.low-temp');
+
     placeDiv.textContent = 'could not process your request..';
 
-    const descriptionDiv = document.querySelector('.description');
     descriptionDiv.textContent = 'please try again!';
+
+    tempDiv.textContent = '';
+    highTempSpan.textContent = '';
+    lowTempSpan.textContent = '';
 }
 
 addListeners();
