@@ -165,6 +165,7 @@ button {
 }
 
 .weather {
+    text-align: center;
     width: 250px;
     height: 250px;
     display: flex;

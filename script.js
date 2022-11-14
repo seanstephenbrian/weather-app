@@ -1,6 +1,6 @@
 // open weather API key: 124d9ff31504e87b00d39357ef138efa
 
-// API calls:
+// API call syntax:
 
     // CITY ONLY:
     // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
@@ -22,10 +22,30 @@ function storeUnitPreference(preference) {
 
 function submitForm(e) {
     e.preventDefault();
+    const cityInput = document.querySelector('#city').value;
+    const countryInput = document.querySelector('#country').value;
+
+    if (cityInput && !countryInput) {
+        const weatherData = getData(cityInput);
+        weatherData
+            .then(apiData => processData(apiData))
+            .catch(msg => { 
+                console.error(msg);
+                showErrorMessage(); 
+            });
+    } else if (cityInput && countryInput) {
+        const weatherData = getData(cityInput, countryInput);
+        weatherData
+            .then(apiData => processData(apiData))
+            .catch(msg => { 
+                console.error(msg);
+                showErrorMessage(); 
+            });
+    } 
 }
 
 // retrieve the data from the openweather API:
-async function getData(city, country, state) {
+async function getData(city, country) {
     const key = '124d9ff31504e87b00d39357ef138efa';
     let units = localStorage.getItem('units');
     if (!units) {
@@ -34,13 +54,12 @@ async function getData(city, country, state) {
 
     let req;
 
-    if (city && !country && !state) {
+    if (city && !country) {
         req = new Request(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=${units}`);
-    } else if (city && country && !state) {
+    } else if (city && country) {
         req = new Request(`https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${key}&units=${units}`);
-    } else if (city && country && state) {
-        req = new Request(`https://api.openweathermap.org/data/2.5/weather?q=${city},${state},${country}&appid=${key}&units=${units}`);
-    }
+    } 
+
     const response = await fetch(req);
     const json = await response.json();
     if (json.cod !== 200) {
@@ -73,7 +92,7 @@ function processData(apiData) {
     }
     
     console.log(displayData);
-    // showWeatherReport(displayData);
+    showWeatherReport(displayData);
 }
 
 // DOM-related javascript:
@@ -181,21 +200,23 @@ function showWeatherReport(displayData) {
     const units = localStorage.getItem('units');
     if (units === 'imperial') {
         tempDiv.textContent = `${displayData.temp} F`;
-        highTempSpan.textContent = `high: ${displayData.high}`;
+        highTempSpan.textContent = `high: ${displayData.high} // `;
         lowTempSpan.textContent = `low: ${displayData.low}`;
     } else if (units === 'metric') {
         tempDiv.textContent = `current temperature: ${displayData.temp} C`;
-        highTempSpan.textContent = `high: ${displayData.high}`;
+        highTempSpan.textContent = `high: ${displayData.high} // `;
         lowTempSpan.textContent = `low: ${displayData.low}`;
     }
 }
 
+function showErrorMessage() {
+    hideForm();
 
+    const placeDiv = document.querySelector('.place');
+    placeDiv.textContent = 'could not process your request..';
 
-// this code will be inside a form-submit function:
-    // london example for testing purposes only:
+    const descriptionDiv = document.querySelector('.description');
+    descriptionDiv.textContent = 'please try again!';
+}
 
-    const testData = getData('johannesburg');
-    testData
-        .then(apiData => processData(apiData))
-        .catch(msg => { console.error(msg) });
+addFormSubmitListener();
