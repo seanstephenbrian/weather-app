@@ -66,6 +66,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--clear-day);
+    position: relative;
 }
 
 header {
@@ -239,6 +240,10 @@ footer {
     max-height: 20vh;
     display: grid;
     grid-template-columns: repeat(9, 1fr);
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
 }
 
 .block-1 {
