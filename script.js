@@ -19,6 +19,11 @@ function storeUnitPreference(preference) {
     // for testing purposes:
     storeUnitPreference('imperial');
 
+
+function submitForm(e) {
+    e.preventDefault();
+}
+
 // retrieve the data from the openweather API:
 async function getData(city, country, state) {
     const key = '124d9ff31504e87b00d39357ef138efa';
@@ -68,25 +73,28 @@ function processData(apiData) {
     }
     
     console.log(displayData);
-    showWeatherReport(displayData);
+    // showWeatherReport(displayData);
 }
 
 // DOM-related javascript:
 
+function addFormSubmitListener() {
+    const form = document.querySelector('.search-form');
+    form.addEventListener('submit', submitForm);
+}
+
+function showForm() {
+    const weather = document.querySelector('.weather');
+    weather.classList.add('hide');
+    const search = document.querySelector('.search');
+    search.classList.remove('hide');
+}
+
 function hideForm() {
     const search = document.querySelector('.search');
     search.classList.add('hide');
-}
-
-function setHeaderImg(time) {
-    const header = document.querySelector('header');
-    header.classList.remove('night', 'day');
-    header.classList.add(time);
-    if (time === 'day') {
-        header.style.backgroundImage = `url(img/day.jpg)`;
-    } else if (time === 'night') {
-        header.style.backgroundImage = `url(img/night.jpg)`;
-    }
+    const weather = document.querySelector('.weather');
+    weather.classList.remove('hide');
 }
 
 function setBgColor(weather, time, id) {
@@ -137,21 +145,28 @@ function setBgColor(weather, time, id) {
 
 }
 
-function setFooterColors(time) {
+function setHeaderFooterStyle(time) {
     const footer = document.querySelector('footer');
     footer.classList.remove('day', 'night');
     footer.classList.add(time);
+
+    const header = document.querySelector('header');
+    header.classList.remove('night', 'day');
+    header.classList.add(time);
+    if (time === 'day') {
+        header.style.backgroundImage = `url(img/day.jpg)`;
+    } else if (time === 'night') {
+        header.style.backgroundImage = `url(img/night.jpg)`;
+    }
 }
 
 function showWeatherReport(displayData) {
 
     hideForm();
 
-    setHeaderImg(displayData.time);
+    setHeaderFooterStyle(displayData.time);
 
     setBgColor(displayData.weather, displayData.time, displayData.id);
-
-    setFooterColors(displayData.time);
 
     const placeDiv = document.querySelector('.place');
     const descriptionDiv = document.querySelector('.description');
@@ -180,7 +195,7 @@ function showWeatherReport(displayData) {
 // this code will be inside a form-submit function:
     // london example for testing purposes only:
 
-    const testData = getData('chicago');
+    const testData = getData('johannesburg');
     testData
         .then(apiData => processData(apiData))
         .catch(msg => { console.error(msg) });
