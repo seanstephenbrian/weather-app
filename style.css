@@ -352,8 +352,8 @@ input:checked + .slider:before {
         transition: 50ms linear;
     }
 
-    .search-again {
-        transition: 0.4s ease-in-out;
+    button {
+        transition: 0.15s ease-in-out;
     }
 
     .page-title:hover {
@@ -363,12 +363,7 @@ input:checked + .slider:before {
     }
 
     button:hover {
-        font-style: italic;
-    }
-
-    .search-again:hover {
-        font-style: normal;
-        transform: rotate(600deg);
+        transform: scale(1.1);
     }
 
     .place:hover {
