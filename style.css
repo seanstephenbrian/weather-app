@@ -39,6 +39,7 @@ html,
 body {
     min-height: 100vh;
     font-family: 'Torre Farfan', 'EB Garamond', 'Times New Roman';
+    box-sizing: border-box;
 }
 
 @font-face {
@@ -69,12 +70,13 @@ body {
 
 header {
     z-index: 1;
-    padding: 3vh 0;
+    padding: 2vh 0 1vh;
     min-height: 7vh;
     max-height: 20vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 1rem;
     box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.505);
     background-image: url('img/day.jpg');
     background-size: cover;
@@ -89,9 +91,7 @@ header {
 }
 
 .unit-switch {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
+    position: relative;
 }
 
 .indicator {
@@ -142,6 +142,7 @@ header.night {
 }
 
 .search-form input {
+    font-family: 'Torre Farfan';
     appearance: none;
     outline: none;
     border: none;

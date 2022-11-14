@@ -16,10 +16,6 @@ function storeUnitPreference(preference) {
     localStorage.setItem('units', preference);
 }
 
-    // for testing purposes:
-    storeUnitPreference('imperial');
-
-
 function submitForm(e) {
     e.preventDefault();
     const cityInput = document.querySelector('#city').value;
@@ -129,6 +125,15 @@ function changeUnit(e) {
         const cityInput = localStorage.getItem('cityInput');
         const countryInput = localStorage.getItem('countryInput');
         sendRequest(cityInput, countryInput);
+    }
+}
+
+function checkForUnitPreference() {
+    const units = localStorage.getItem('units');
+    if (units && units === 'metric') {
+
+        const unitInput = document.querySelector('#unit-input');
+        unitInput.checked = true;
     }
 }
 
@@ -254,3 +259,5 @@ function showErrorMessage() {
 }
 
 addListeners();
+
+checkForUnitPreference();
