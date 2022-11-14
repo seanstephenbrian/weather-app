@@ -9,7 +9,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>how<span class="apostrophe">'</span>s the weather?</header>
+    <header>
+        <div class="page-title">how<span class="apostrophe">'</span>s the weather?</div>
+        <div class="unit-switch">
+            <div class="indicator">
+                <div class="f">F</div>
+                <div class="c">C</div>
+            </div>
+            <label class="switch">
+                <input id="unit-input" type="checkbox">
+                <span class="slider round"></span>
+            </label>           
+        </div>
+    </header>
     <div class="main">
         <div class="search">
             <form class="search-form" action="GET">

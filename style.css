@@ -55,10 +55,6 @@ body {
     font-family: 'EB Garamond';
 }
 
-.day {
-
-}
-
 .night {
     filter: brightness(90%);
     backdrop-filter: brightness(80%);
@@ -79,13 +75,34 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    letter-spacing: 0.1rem;
     box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.505);
     background-image: url('img/day.jpg');
     background-size: cover;
+    position: relative;
+}
+
+.page-title {
+    font-size: 2rem;
+    letter-spacing: 0.1rem;
     color: white;
     text-shadow: 0 0 5px black;
+}
+
+.unit-switch {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+}
+
+.indicator {
+    pointer-events: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    position: absolute;
+    top: 9px;
+    left: 11px;
 }
 
 header.night {
@@ -259,8 +276,68 @@ footer {
     background-color: var(--snow);
 }
 
+/* slider switch styling from w3schools: */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 2rem;
+}
+  
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+  
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(204, 204, 204, 0.595);
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+  
+input:checked + .slider {
+    background-color: #819fe4a3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+}
+  
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
 @media only screen and (min-width: 750px) {
-    header,
+    .page-title,
     .place,
     .description,
     .temp,
@@ -272,7 +349,7 @@ footer {
         transition: 0.4s ease-in-out;
     }
 
-    header:hover {
+    .page-title:hover {
         font-style: italic;
         letter-spacing: 1rem;
         text-indent: 1rem;

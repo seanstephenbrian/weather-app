@@ -23,25 +23,27 @@ function storeUnitPreference(preference) {
 function submitForm(e) {
     e.preventDefault();
     const cityInput = document.querySelector('#city').value;
+    localStorage.setItem('cityInput', cityInput);
     const countryInput = document.querySelector('#country').value;
+    localStorage.setItem('countryInput', countryInput);
+    
+    sendRequest(cityInput, countryInput);
+}
 
+function sendRequest(cityInput, countryInput) {
+    let weatherData;
     if (cityInput && !countryInput) {
-        const weatherData = getData(cityInput);
-        weatherData
-            .then(apiData => processData(apiData))
-            .catch(msg => { 
-                console.error(msg);
-                showErrorMessage(); 
-            });
+        weatherData = getData(cityInput);
+        
     } else if (cityInput && countryInput) {
-        const weatherData = getData(cityInput, countryInput);
-        weatherData
-            .then(apiData => processData(apiData))
-            .catch(msg => { 
-                console.error(msg);
-                showErrorMessage(); 
-            });
-    } 
+        weatherData = getData(cityInput, countryInput);
+    }
+    weatherData
+        .then(apiData => processData(apiData))
+        .catch(msg => { 
+            console.error(msg);
+            showErrorMessage(); 
+        });
 }
 
 // retrieve the data from the openweather API:
@@ -103,6 +105,31 @@ function addListeners() {
 
     const searchAgainBtn = document.querySelector('.search-again');
     searchAgainBtn.addEventListener('click', showForm);
+
+    const unitInput = document.querySelector('#unit-input');
+    unitInput.addEventListener('change', changeUnit);
+}
+
+function changeUnit(e) {
+    const f = document.querySelector('.f');
+    const c = document.querySelector('.c');
+
+    if (this.checked) {
+        c.style.fontSize = '105%';
+        f.style.fontSize = '95%';
+        storeUnitPreference('metric');
+    } else if (!this.checked) {
+        c.style.fontSize = '95%';
+        f.style.fontSize = '105%';
+        storeUnitPreference('imperial');
+    }
+
+    const weather = document.querySelector('.weather');
+    if (!weather.classList.contains('hide')) {
+        const cityInput = localStorage.getItem('cityInput');
+        const countryInput = localStorage.getItem('countryInput');
+        sendRequest(cityInput, countryInput);
+    }
 }
 
 function showForm() {
@@ -210,7 +237,7 @@ function showWeatherReport(displayData) {
         highTempSpan.textContent = `high: ${displayData.high} // `;
         lowTempSpan.textContent = `low: ${displayData.low}`;
     } else if (units === 'metric') {
-        tempDiv.textContent = `current temperature: ${displayData.temp} C`;
+        tempDiv.textContent = `${displayData.temp} C`;
         highTempSpan.textContent = `high: ${displayData.high} // `;
         lowTempSpan.textContent = `low: ${displayData.low}`;
     }
