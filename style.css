@@ -122,6 +122,7 @@ header.night {
 .search-form,
 .weather {
     position: relative;
+    margin-top: -10vh;
 }
 
 .search-form {
