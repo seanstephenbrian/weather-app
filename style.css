@@ -71,7 +71,7 @@ body {
 header {
     z-index: 1;
     padding: 2vh 0 1vh;
-    min-height: 7vh;
+    min-height: 40px;
     max-height: 20vh;
     display: flex;
     flex-direction: column;
@@ -381,6 +381,27 @@ input:checked + .slider:before {
     }
 
 }
+
+@media only screen and (max-width: 500px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+@media only screen and (max-height: 500px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
 
 .hide {
     display: none;
