@@ -97,9 +97,12 @@ function processData(apiData) {
 
 // DOM-related javascript:
 
-function addFormSubmitListener() {
+function addListeners() {
     const form = document.querySelector('.search-form');
     form.addEventListener('submit', submitForm);
+
+    const searchAgainBtn = document.querySelector('.search-again');
+    searchAgainBtn.addEventListener('click', showForm);
 }
 
 function showForm() {
@@ -107,6 +110,10 @@ function showForm() {
     weather.classList.add('hide');
     const search = document.querySelector('.search');
     search.classList.remove('hide');
+
+    // clear out contents of inputs:
+    document.querySelector('#city').value = '';
+    document.querySelector('#country').value = '';
 }
 
 function hideForm() {
@@ -219,4 +226,4 @@ function showErrorMessage() {
     descriptionDiv.textContent = 'please try again!';
 }
 
-addFormSubmitListener();
+addListeners();

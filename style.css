@@ -162,6 +162,15 @@ button {
     justify-content: center;
     align-items: center;
     text-align: center;
+    box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.216);
+}
+
+.search-again {
+    margin-top: 3rem;
+    background-image: url('img/form-bg.jpg');
+    background-size: cover;
+    color: white;
+    text-shadow: 0 0 5px black;
 }
 
 .weather {
