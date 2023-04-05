@@ -1,16 +1,3 @@
-// open weather API key: 124d9ff31504e87b00d39357ef138efa
-
-// API call syntax:
-
-    // CITY ONLY:
-    // https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-
-    // CITY, COUNTRY:
-    // https://api.openweathermap.org/data/2.5/weather?q={city name},{country code}&appid={API key}
-
-    // CITY, STATE, COUNTRY:
-    // https://api.openweathermap.org/data/2.5/weather?q={city name},{state code},{country code}&appid={API key}
-
 // user can click F / C buttons to set their preference to either 'imperial' or 'metric':
 function storeUnitPreference(preference) {
     localStorage.setItem('units', preference);
